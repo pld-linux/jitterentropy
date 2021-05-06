@@ -41,7 +41,7 @@ Static jitterentropy library.
 export LDFLAGS="%{rpmldflags} -lpthread"
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcppflags} %{rpmcflags} -O0"
+	CFLAGS="%{rpmcppflags} %{rpmcflags} -fPIC -O0"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -49,7 +49,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install install-static \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX="%{_prefix}" \
-	LIB="%{_lib}"
+	LIBDIR="%{_lib}"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
