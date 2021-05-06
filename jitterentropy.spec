@@ -49,7 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install install-static \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX="%{_prefix}" \
-	LIBDIR="%{_lib}"
+	LIBDIR="%{_lib}" \
+	INSTALL_STRIP=install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
