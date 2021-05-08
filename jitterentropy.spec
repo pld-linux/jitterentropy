@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.md COPYING COPYING.bsd COPYING.gplv2 README.md
+%doc CHANGES.md COPYING COPYING.bsd README.md
 %attr(755,root,root) %{_libdir}/libjitterentropy.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libjitterentropy.so.3
 
