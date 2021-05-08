@@ -1,4 +1,5 @@
 Summary:	Library implementing the jitter entropy source
+Summary(pl.UTF-8):	Biblioteka implementująca źródło entropii jitter
 Name:		jitterentropy
 Version:	3.0.2
 Release:	1
@@ -18,21 +19,36 @@ high-resolution time stamp. It is a small-scale, yet fast entropy
 source that is viable in almost all environments and on a lot of CPU
 architectures.
 
+%description -l pl.UTF-8
+Jitter RNG zapewnia źródło szumu wykorzystujące fluktuacje czasu
+wykonywania kodu przez CPU. Nie zależy od żadnego zasobu systemowego
+innego niż znacznik czasu wysokiej rozdzielczości. Jest to źródło
+entropii małej skali, ale szybkie, opłacalne w prawie każdym
+środowisku, przy wielu architekturach CPU.
+
 %package devel
 Summary:	Header files for jitterentropy library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki jitterentropy
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for jitterentropy library.
 
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki jitterentropy.
+
 %package static
 Summary:	Static jitterentropy library
+Summary(pl.UTF-8):	Statyczna biblioteka jitterentropy
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static jitterentropy library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka jitterentropy.
 
 %prep
 %setup -q -n %{name}-library-%{version}
