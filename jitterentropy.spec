@@ -54,10 +54,12 @@ Statyczna biblioteka jitterentropy.
 %setup -q -n %{name}-library-%{version}
 
 %build
-export LDFLAGS="%{rpmldflags} -lpthread"
+# NOTE: jitterentropy-base.c must be compiled with optimizations disabled
+LDFLAGS="%{rpmldflags}" \
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcppflags} %{rpmcflags} -fPIC -O0"
+	CFLAGS="%{rpmcppflags} %{rpmcflags} -fPIC -O0 -fwrapv -Wall -Wextra" \
+	LIBRARIES="rt pthread"
 
 %install
 rm -rf $RPM_BUILD_ROOT
