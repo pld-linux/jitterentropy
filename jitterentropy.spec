@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# static library
+
 Summary:	Library implementing the jitter entropy source
 Summary(pl.UTF-8):	Biblioteka implementująca źródło entropii jitter
 Name:		jitterentropy
@@ -54,7 +58,7 @@ Statyczna biblioteka jitterentropy.
 %build
 # NOTE: jitterentropy-base.c must be compiled with optimizations disabled
 LDFLAGS="%{rpmldflags}" \
-%{__make} \
+%{__make} %{name} %{?with_static_libs:%{name}-static} \
 	CC="%{__cc}" \
 	CFLAGS="%{rpmcppflags} %{rpmcflags} -fPIC -O0 -fwrapv -Wall -Wextra -DJENT_CONF_ENABLE_INTERNAL_TIMER -I. -Isrc" \
 	LIBRARIES="rt pthread"
@@ -62,7 +66,7 @@ LDFLAGS="%{rpmldflags}" \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install install-static \
+%{__make} install %{?with_static_libs:install-static} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX="%{_prefix}" \
 	LIBDIR="%{_lib}" \
@@ -87,6 +91,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/jitterentropy-base-user.h
 %{_mandir}/man3/jitterentropy.3*
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libjitterentropy.a
+%endif
