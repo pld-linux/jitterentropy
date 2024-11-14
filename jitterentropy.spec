@@ -1,15 +1,13 @@
 Summary:	Library implementing the jitter entropy source
 Summary(pl.UTF-8):	Biblioteka implementująca źródło entropii jitter
 Name:		jitterentropy
-Version:	3.0.2
+Version:	3.6.0
 Release:	1
 License:	BSD or GPL v2+
 Group:		Libraries
-Source0:	http://www.chronox.de/jent/%{name}-library-%{version}.tar.xz
-# Source0-md5:	f09160fa89953444bdb73a071abf8484
+Source0:	https://github.com/smuellerDD/jitterentropy-library/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	5554d1b6c915ecf1be20d9748573803f
 URL:		http://www.chronox.de/jent.html
-BuildRequires:	tar >= 1:1.22
-BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -58,7 +56,7 @@ Statyczna biblioteka jitterentropy.
 LDFLAGS="%{rpmldflags}" \
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcppflags} %{rpmcflags} -fPIC -O0 -fwrapv -Wall -Wextra" \
+	CFLAGS="%{rpmcppflags} %{rpmcflags} -fPIC -O0 -fwrapv -Wall -Wextra -DJENT_CONF_ENABLE_INTERNAL_TIMER -I. -Isrc" \
 	LIBRARIES="rt pthread"
 
 %install
@@ -78,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.md COPYING COPYING.bsd README.md
+%doc CHANGES.md LICENSE LICENSE.bsd README.md
 %attr(755,root,root) %{_libdir}/libjitterentropy.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libjitterentropy.so.3
 
